@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicholas - PhD Candidate in Geospatial Information Science</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a4d72;
+            --secondary-color: #2d5a87;
+            --accent-color: #e8954a;
+            --text-dark: #2c3e50;
+            --text-light: #5d6d7e;
+            --background-light: #fafbfc;
+            --background-white: #ffffff;
+            --border-color: #e9ecef;
+            --shadow-light: rgba(26, 77, 114, 0.1);
+            --shadow-medium: rgba(26, 77, 114, 0.15);
+            --gradient-bg: linear-gradient(135deg, #1a4d72 0%, #2d5a87 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .serif {
+            font-family: 'Source Serif Pro', serif;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-bg);
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero .institution {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .hero .research-focus {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            animation: fadeInUp 1s ease 0.8s both;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About Section */
+        .about {
+            background: var(--background-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            text-align: center;
+            position: sticky;
+            top: 120px;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .contact-info {
+            margin-top: 1.5rem;
+        }
+
+        .contact-info p {
+            margin: 0.5rem 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .contact-info i {
+            width: 20px;
+            color: var(--primary-color);
+        }
+
+        /* Research Section */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .research-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--shadow-light);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow-medium);
+        }
+
+        .research-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .research-card .icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .research-methods {
+            margin-top: 2rem;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .method-tag {
+            background: var(--background-light);
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: 500;
+            color: var(--primary-color);
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .method-tag:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Teaching Section */
+        .teaching {
+            background: var(--background-light);
+        }
+
+        .teaching-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .course-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--shadow-medium);
+        }
+
+        .course-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Publications Section */
+        .publication-item {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px var(--shadow-light);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .publication-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-authors {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 0.3rem;
+        }
+
+        .publication-venue {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--gradient-bg);
+            color: white;
+            text-align: center;
+        }
+
+        .contact .section-title {
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .contact-item h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .profile-card {
+                position: static;
+            }
+
+            .research-grid,
+            .teaching-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--accent-color);
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">Nicholas</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#teaching">Teaching</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="serif">Nicholas</h1>
+            <p class="subtitle">PhD Candidate in Geospatial Information Science</p>
+            <p class="institution">University of Texas at Dallas</p>
+            <div class="research-focus">
+                <i class="fas fa-map-marked-alt"></i>
+                Habitat Suitability Modeling • Species Distribution • Machine Learning
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title serif">About Me</h2>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <p>I am a PhD candidate in Geospatial Information Science at the University of Texas at Dallas, working under the guidance of Dr. Fang Qiu. My research focuses on developing innovative approaches to habitat suitability modeling, specifically examining the spatial distribution patterns of rough harvester ants (<em>Pogonomyrmex rugosus</em>) in New Mexico.</p>
+                    
+                    <p>Originally from Ghana, I hold a BA in Education from the University of Cape Coast, where I first developed my passion for research through undergraduate work on teaching methodologies and student performance in history education. This foundation in educational research has informed my current approach to making complex geospatial analyses accessible and meaningful.</p>
+                    
+                    <p>My current research leverages citizen science data from GBIF and iNaturalist platforms, combining traditional ecological modeling with cutting-edge machine learning techniques. I am particularly interested in how community-contributed data can enhance our understanding of species distribution patterns and ecosystem dynamics.</p>
+                    
+                    <p>As a certified drone pilot, I integrate remote sensing technologies with ground-based ecological surveys, applying machine learning approaches for environmental monitoring and conservation planning. My work spans multiple domains, including wind energy siting analysis and public health applications such as malaria prevalence mapping.</p>
+                </div>
+                
+                <div class="profile-card fade-in">
+                    <div class="profile-img">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Nicholas</h3>
+                    <p><strong>PhD Candidate</strong></p>
+                    <p>Geospatial Information Science</p>
+                    
+                    <div class="contact-info">
+                        <p><i class="fas fa-university"></i> University of Texas at Dallas</p>
+                        <p><i class="fas fa-user-tie"></i> Advisor: Dr. Fang Qiu</p>
+                        <p><i class="fas fa-certificate"></i> Certified Drone Pilot</p>
+                        <p><i class="fas fa-chalkboard-teacher"></i> Teaching Assistant</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="research" id="research">
+        <div class="container">
+            <h2 class="section-title serif">Research</h2>
+            
+            <div class="research-grid">
+                <div class="research-card fade-in">
+                    <div class="icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Dissertation Research</h3>
+                    <h4>Habitat Suitability Modeling of Rough Harvester Ants</h4>
+                    <p>Developing comprehensive species distribution models for <em>Pogonomyrmex rugosus</em> in New Mexico using ensemble modeling approaches. This research integrates citizen science data from GBIF and iNaturalist with environmental variables to predict suitable habitats and understand distribution patterns.</p>
+                </div>
+                
+                <div class="research-card fade-in">
+                    <div class="icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <h3>Wind Energy Siting</h3>
+                    <h4>Machine Learning for Renewable Energy Planning</h4>
+                    <p>Conducted comprehensive analysis of wind turbine placement in West Texas using regression modeling and machine learning. Examined relationships between physical, infrastructural, and socioeconomic factors, revealing that demographic variables are stronger predictors than physical characteristics.</p>
+                </div>
+                
+                <div class="research-card fade-in">
+                    <div class="icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3>Public Health Applications</h3>
+                    <h4>Malaria Prevalence Mapping in Ghana</h4>
+                    <p>Developed interactive geospatial dashboards and statistical visualizations using DHS survey data to analyze malaria distribution patterns. Created comprehensive mapping solutions for understanding disease prevalence at multiple spatial scales.</p>
+                </div>
+                
+                <div class="research-card fade-in">
+                    <div class="icon">
+                        <i class="fas fa-drone"></i>
+                    </div>
+                    <h3>Remote Sensing Applications</h3>
+                    <h4>UAS-based Environmental Monitoring</h4>
+                    <p>Apply machine learning techniques for processing UAS imagery in wetland restoration projects. Integrate LiDAR scanning and photogrammetric analysis for environmental monitoring and conservation planning applications.</p>
+                </div>
+            </div>
+
+            <div class="research-methods fade-in">
+                <h3 class="serif" style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">Research Methods & Technologies</h3>
+                <div class="methods-grid">
+                    <div class="method-tag">Species Distribution Modeling</div>
+                    <div class="method-tag">Machine Learning</div>
+                    <div class="method-tag">BIOMOD2 Ensemble Modeling</div>
+                    <div class="method-tag">Remote Sensing</div>
+                    <div class="method-tag">Python Programming</div>
+                    <div class="method-tag">R Statistical Analysis</div>
+                    <div class="method-tag">ArcGIS & QGIS</div>
+                    <div class="method-tag">Citizen Science Data</div>
+                    <div class="method-tag">UAS/Drone Technology</div>
+                    <div class="method-tag">LiDAR Processing</div>
+                    <div class="method-tag">Geospatial Analysis</div>
+                    <div class="method-tag">Statistical Modeling</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teaching Section -->
+    <section class="teaching" id="teaching">
+        <div class="container">
+            <h2 class="section-title serif">Teaching Experience</h2>
+            
+            <div class="teaching-grid">
+                <div class="course-card fade-in">
+                    <i class="fas fa-code" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                    <h3>Python Programming</h3>
+                    <p><strong>Teaching Assistant</strong></p>
+                    <p>Support students in learning fundamental programming concepts, data analysis techniques, and geospatial applications using Python. Assist with lab sessions, grading, and providing individualized guidance for programming projects.</p>
+                </div>
+                
+                <div class="course-card fade-in">
+                    <i class="fas fa-chart-line" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                    <h3>Applied Regression</h3>
+                    <p><strong>Teaching Assistant</strong></p>
+                    <p>Guide students through statistical modeling concepts, regression analysis techniques, and practical applications in geospatial research. Support with statistical software training and interpretation of analysis results.</p>
+                </div>
+                
+                <div class="course-card fade-in">
+                    <i class="fas fa-globe" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                    <h3>Internet Mapping</h3>
+                    <p><strong>Teaching Assistant</strong></p>
+                    <p>Instruct students in web-based GIS technologies, including ArcGIS API for JavaScript, HTML5 applications, and Experience Builder dashboards. Support development of interactive web mapping applications and spatial data visualization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="publications" id="publications">
+        <div class="container">
+            <h2 class="section-title serif">Publications & Presentations</h2>
+            
+            <div class="fade-in">
+                <div class="publication-item">
+                    <div class="publication-title">Habitat Suitability Modeling of Rough Harvester Ants Using Citizen Science Data</div>
+                    <div class="publication-authors">Nicholas [Last Name], Dr. Fang Qiu</div>
+                    <div class="publication-venue">In Preparation for Ecological Modelling</div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">Machine Learning Approaches in Wind Energy Siting: A West Texas Case Study</div>
+                    <div class="publication-authors">Nicholas [Last Name], Collaborators</div>
+                    <div class="publication-venue">Prepared for AAG Annual Meeting 2025</div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">Integrating Citizen Science Data for Species Distribution Modeling</div>
+                    <div class="publication-authors">Nicholas [Last Name]</div>
+                    <div class="publication-venue">Conference Presentation - AAG 2024</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="color: var(--text-light); font-style: italic;">Additional publications and conference presentations are in development as part of ongoing dissertation research.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title serif">Get In Touch</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9;">I'm always interested in discussing research collaborations, academic opportunities, and innovative applications of geospatial science.</p>
+            
+            <div class="contact-grid">
+                <div class="contact-item fade-in">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <a href="mailto:your.email@utdallas.edu">your.email@utdallas.edu</a>
+                </div>
+                
+                <div class="contact-item fade-in">
+                    <i class="fab fa-github"></i>
+                    <h3>GitHub</h3>
+                    <a href="https://github.com/yourusername">github.com/yourusername</a>
+                </div>
+                
+                <div class="contact-item fade-in">
+                    <i class="fab fa-linkedin"></i>
+                    <h3>LinkedIn</h3>
+                    <a href="https://linkedin.com/in/yourprofile">linkedin.com/in/yourprofile</a>
+                </div>
+                
+                <div class="contact-item fade-in">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>ORCID</h3>
+                    <a href="https://orcid.org/your-orcid-id">ORCID Profile</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Nicholas. PhD Candidate in Geospatial Information Science, University of Texas at Dallas.</p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;">Building bridges between ecology, technology, and spatial science.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll progress bar
+        function updateScrollProgress() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
+        }
+
+        window.addEventListener('scroll', updateScrollProgress);
+
+        // Fade in animation on scroll
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScrollAnimation);
+        handleScrollAnimation(); // Run on page load
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.pageYOffset >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
